@@ -233,6 +233,12 @@ class PrinterModulePlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
           val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
           printerHelper.printSingleBitmap(image, align)
         }
+        "reset" -> {
+          printerHelper.reset()
+        }
+        "startPrint" -> {
+          printerHelper.startPrint()
+        }
       }
     }
   }

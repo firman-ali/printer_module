@@ -124,3 +124,13 @@ class PrintSingleBitmap extends PrintCommand {
     'align': align.index,
   };
 }
+
+class PrintReset extends PrintCommand {
+  @override
+  Map<String, dynamic> toJson() => {'type': 'reset'};
+}
+
+class PrintStartPrinting extends PrintCommand {
+  @override
+  Map<String, dynamic> toJson() => {'type': 'startPrint'};
+}
