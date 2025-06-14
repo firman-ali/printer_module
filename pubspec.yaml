@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  blue_thermal_printer:
+    git:
+      url: https://github.com/AgusDharmaUDEL93/blue_thermal_printer.git
 
 dev_dependencies:
   flutter_test:
