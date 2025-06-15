@@ -190,14 +190,16 @@ class PrinterModulePlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
           val fontSize = command["fontSize"] as Int
           val align = command["align"] as Int
           val isBold = command["isBold"] as Boolean
-          printerHelper.print(text, fontSize = fontSize, align = align, isBold = isBold)
+          val printSize = command["printSize"] as Int?
+          printerHelper.print(text, fontSize = fontSize, align = align, isBold = isBold, printSize = printSize)
         }
         "separator" -> {
           printerHelper.printStrLine()
         }
         "feed" -> {
           val lines = command["lines"] as Int
-          printerHelper.feedPaper(lines)
+          val printSize = command["printSize"] as Int?
+          printerHelper.feedPaper(lines, printSize = printSize)
         }
         "cut" -> {
           printerHelper.partialCut()
@@ -205,33 +207,38 @@ class PrinterModulePlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         "leftRight" -> {
           val leftText = command["leftText"] as String
           val rightText = command["rightText"] as String
-          printerHelper.printLeftRight(leftText, rightText)
+          val printSize = command["printSize"] as Int?
+          printerHelper.printLeftRight(leftText, rightText, printSize = printSize)
         }
         "threeLines" -> {
           val leftText = command["leftText"] as String
           val centerText = command["centerText"] as String
           val rightText = command["rightText"] as String
-          printerHelper.printThreeLineText(leftText, centerText, rightText)
+          val printSize = command["printSize"] as Int?
+          printerHelper.printThreeLineText(leftText, centerText, rightText, printSize = printSize)
         }
         "qr" -> {
           val qrText = command["qrText"] as String
           val align = command["align"] as Int
           val size = command["size"] as Int
-          printerHelper.printQr(qrText, align, size)
+          val printSize = command["printSize"] as Int?
+          printerHelper.printQr(qrText, align, size, printSize = printSize)
         }
         "bitmap" -> {
           val imageStr = command["imageStr"] as String
           val imageWidth = command["imageWidth"] as Int
           val imageHeight = command["imageHeight"] as Int
+          val printSize = command["printSize"] as Int?
           val imageBytes = Base64.decode(imageStr, 0)
-          printerHelper.printBitmap(imageBytes, imageWidth, imageHeight)
+          printerHelper.printBitmap(imageBytes, imageWidth, imageHeight, printSize = printSize)
         }
         "singleBitmap" -> {
           val imageStr = command["imageStr"] as String
           val align = command["align"] as Int
+          val printSize = command["printSize"] as Int?
           val imageBytes = Base64.decode(imageStr, 0)
           val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-          printerHelper.printSingleBitmap(image, align)
+          printerHelper.printSingleBitmap(image, align, printSize = printSize)
         }
         "reset" -> {
           printerHelper.reset()

@@ -12,12 +12,14 @@ class PrintText extends PrintCommand {
   final int fontSize;
   final PrintAlign align;
   final bool isBold;
+  final int printSize;
 
   PrintText(
     this.text, {
     this.fontSize = 0,
     this.align = PrintAlign.left,
     this.isBold = false,
+    this.printSize = 58,
   });
 
   @override
@@ -27,6 +29,7 @@ class PrintText extends PrintCommand {
     'fontSize': fontSize,
     'align': align.index,
     'isBold': isBold,
+    'printSize': printSize,
   };
 }
 
@@ -37,11 +40,16 @@ class PrintSeparator extends PrintCommand {
 
 class PrintFeed extends PrintCommand {
   final int lines;
+  final int printSize;
 
-  PrintFeed(this.lines);
+  PrintFeed(this.lines, {this.printSize = 58});
 
   @override
-  Map<String, dynamic> toJson() => {'type': 'feed', 'lines': lines};
+  Map<String, dynamic> toJson() => {
+    'type': 'feed',
+    'lines': lines,
+    'printSize': printSize,
+  };
 }
 
 class PrintCut extends PrintCommand {
@@ -52,14 +60,16 @@ class PrintCut extends PrintCommand {
 class PrintLeftRight extends PrintCommand {
   final String leftText;
   final String rightText;
+  final int printSize;
 
-  PrintLeftRight(this.leftText, this.rightText);
+  PrintLeftRight(this.leftText, this.rightText, {this.printSize = 58});
 
   @override
   Map<String, dynamic> toJson() => {
     'type': 'leftRight',
     'leftText': leftText,
     'rightText': rightText,
+    'printSize': printSize,
   };
 }
 
@@ -67,8 +77,14 @@ class PrintThreeLine extends PrintCommand {
   final String leftText;
   final String centerText;
   final String rightText;
+  final int printSize;
 
-  PrintThreeLine(this.leftText, this.centerText, this.rightText);
+  PrintThreeLine(
+    this.leftText,
+    this.centerText,
+    this.rightText, {
+    this.printSize = 58,
+  });
 
   @override
   Map<String, dynamic> toJson() => {
@@ -76,6 +92,7 @@ class PrintThreeLine extends PrintCommand {
     'leftText': leftText,
     'centerText': centerText,
     'rightText': rightText,
+    'printSize': printSize,
   };
 }
 
@@ -83,8 +100,9 @@ class PrintQr extends PrintCommand {
   final String qrText;
   final PrintAlign align;
   final int size;
+  final int printSize;
 
-  PrintQr(this.qrText, this.align, this.size);
+  PrintQr(this.qrText, this.align, this.size, {this.printSize = 58});
 
   @override
   Map<String, dynamic> toJson() => {
@@ -92,6 +110,7 @@ class PrintQr extends PrintCommand {
     'qrText': qrText,
     'align': align.index,
     'size': size,
+    'printSize': printSize,
   };
 }
 
@@ -99,8 +118,16 @@ class PrintBitmap extends PrintCommand {
   final Uint8List imageBytes;
   final int imageWidth;
   final int imageHeight;
+  final PrintAlign align;
+  final int printSize;
 
-  PrintBitmap(this.imageBytes, this.imageWidth, this.imageHeight);
+  PrintBitmap(
+    this.imageBytes,
+    this.imageWidth,
+    this.imageHeight,
+    this.align, {
+    this.printSize = 58,
+  });
 
   @override
   Map<String, dynamic> toJson() => {
@@ -108,20 +135,24 @@ class PrintBitmap extends PrintCommand {
     'imageStr': base64Encode(imageBytes),
     'imageWidth': imageWidth,
     'imageHeight': imageHeight,
+    'align': align.index,
+    'printSize': printSize,
   };
 }
 
 class PrintSingleBitmap extends PrintCommand {
   final Uint8List imageBytes;
   final PrintAlign align;
+  final int printSize;
 
-  PrintSingleBitmap(this.imageBytes, this.align);
+  PrintSingleBitmap(this.imageBytes, this.align, {this.printSize = 58});
 
   @override
   Map<String, dynamic> toJson() => {
     'type': 'singleBitmap',
     'imageStr': base64Encode(imageBytes),
     'align': align.index,
+    'printSize': printSize,
   };
 }
 
