@@ -194,7 +194,8 @@ class PrinterModulePlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
           printerHelper.print(text, fontSize = fontSize, align = align, isBold = isBold, printSize = printSize)
         }
         "separator" -> {
-          printerHelper.printStrLine()
+          val printSize = command["printSize"] as Int?
+          printerHelper.printStrLine(printSize = printSize)
         }
         "feed" -> {
           val lines = command["lines"] as Int

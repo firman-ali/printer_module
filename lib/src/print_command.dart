@@ -34,8 +34,15 @@ class PrintText extends PrintCommand {
 }
 
 class PrintSeparator extends PrintCommand {
+  final int printSize;
+
+  PrintSeparator({this.printSize = 58});
+
   @override
-  Map<String, dynamic> toJson() => {'type': 'separator'};
+  Map<String, dynamic> toJson() => {
+    'type': 'separator',
+    'printSize': printSize,
+  };
 }
 
 class PrintFeed extends PrintCommand {
