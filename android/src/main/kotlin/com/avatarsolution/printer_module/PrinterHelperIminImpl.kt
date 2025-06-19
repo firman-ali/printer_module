@@ -52,11 +52,7 @@ class PrinterHelperIminImpl(private val context: Context) : PrinterHelper {
     }
 
     override fun connectPrinter(): Int {
-        return if(IminPrinterHelper.getInstance().printerStatus == -1) {
-            if (IminPrinterHelper.getInstance().initPrinterService(context)) 0 else -1
-        } else {
-            IminPrinterHelper.getInstance().printerStatus
-        }
+        return if (IminPrinterHelper.getInstance().initPrinterService(context)) 0 else -1
     }
 
     override fun connectUsbPrinter(deviceId: String): Int {
@@ -74,9 +70,7 @@ class PrinterHelperIminImpl(private val context: Context) : PrinterHelper {
     override fun initPrinter() {}
 
     override fun deInitPrinter() {
-        if(IminPrinterHelper.getInstance().printerStatus != -1) {
-            IminPrinterHelper.getInstance().deInitPrinterService(context)
-        }
+        IminPrinterHelper.getInstance().deInitPrinterService(context)
     }
 
     override fun reset() {
@@ -90,10 +84,11 @@ class PrinterHelperIminImpl(private val context: Context) : PrinterHelper {
         isBold: Boolean,
         printSize: Int?
     ) {
-        IminPrinterHelper.getInstance().setCodeAlignment(align)
-        IminPrinterHelper.getInstance().setFontCharSize(fontSize, 0, 0, 0)
-        IminPrinterHelper.getInstance().setFontBold(isBold)
-        IminPrinterHelper.getInstance().printText(data + "\n",null)
+        val printerHelper = IminPrinterHelper.getInstance()
+        printerHelper.setCodeAlignment(align)
+        printerHelper.setFontCharSize(fontSize, 0, 0, 0)
+        printerHelper.setFontBold(isBold)
+        printerHelper.printText(data + "\n",null)
     }
 
     override fun startPrint() {
@@ -101,35 +96,40 @@ class PrinterHelperIminImpl(private val context: Context) : PrinterHelper {
     }
 
     override fun printStrLine(printSize: Int?) {
-        IminPrinterHelper.getInstance().setCodeAlignment(1)
-        IminPrinterHelper.getInstance().setFontBold(false)
-        IminPrinterHelper.getInstance().setFontCharSize(0, 0, 0, 0)
-        IminPrinterHelper.getInstance().printText(strLine() + "\n",null)
+        val printerHelper = IminPrinterHelper.getInstance()
+        printerHelper.setCodeAlignment(1)
+        printerHelper.setFontBold(false)
+        printerHelper.setFontCharSize(0, 0, 0, 0)
+        printerHelper.printText(strLine() + "\n",null)
     }
 
     override fun printLeftRight(data1: String, data2: String, printSize: Int?) {
-        IminPrinterHelper.getInstance().setCodeAlignment(0)
-        IminPrinterHelper.getInstance().setFontBold(false)
-        IminPrinterHelper.getInstance().setFontCharSize(0, 0, 0, 0)
-        IminPrinterHelper.getInstance().printText(formatLeftRight(data1, data2) + "\n",null)
+        val printerHelper = IminPrinterHelper.getInstance()
+        printerHelper.setCodeAlignment(0)
+        printerHelper.setFontBold(false)
+        printerHelper.setFontCharSize(0, 0, 0, 0)
+        printerHelper.printText(formatLeftRight(data1, data2) + "\n",null)
     }
 
     override fun printThreeLineText(data1: String, data2: String, data3: String, printSize: Int?) {
-        IminPrinterHelper.getInstance().setCodeAlignment(0)
-        IminPrinterHelper.getInstance().setFontBold(false)
-        IminPrinterHelper.getInstance().setFontCharSize(0, 0, 0, 0)
-        IminPrinterHelper.getInstance().printText(formatThreeLine(data1, data2, data3) + "\n",null)
+        val printerHelper = IminPrinterHelper.getInstance()
+        printerHelper.setCodeAlignment(0)
+        printerHelper.setFontBold(false)
+        printerHelper.setFontCharSize(0, 0, 0, 0)
+        printerHelper.printText(formatThreeLine(data1, data2, data3) + "\n",null)
     }
 
     override fun printSingleBitmap(image: Bitmap, align: Int, printSize: Int?) {
-        IminPrinterHelper.getInstance().setCodeAlignment(align)
-        IminPrinterHelper.getInstance().printBitmap(image, null)
+        val printerHelper = IminPrinterHelper.getInstance()
+        printerHelper.setCodeAlignment(align)
+        printerHelper.printBitmap(image, null)
     }
 
     override fun printQr(data: String, align: Int, size: Int, printSize: Int?) {
-        IminPrinterHelper.getInstance().setCodeAlignment(align)
-        IminPrinterHelper.getInstance().setQrCodeSize(size)
-        IminPrinterHelper.getInstance().printQrCode(data, null)
+        val printerHelper = IminPrinterHelper.getInstance()
+        printerHelper.setCodeAlignment(align)
+        printerHelper.setQrCodeSize(size)
+        printerHelper.printQrCode(data, null)
     }
 
     override fun getStatus(): Int {
