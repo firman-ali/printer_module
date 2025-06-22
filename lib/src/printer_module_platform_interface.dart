@@ -48,7 +48,7 @@ abstract class PrinterModulePlatform extends PlatformInterface {
     throw UnimplementedError('getSerialDevices() has not been implemented.');
   }
 
-  Future<int> connectPrinter() {
+  Future<int> connectPrinter(PrinterType printerType) {
     throw UnimplementedError('connectPrinter() has not been implemented.');
   }
 

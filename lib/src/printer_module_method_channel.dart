@@ -52,9 +52,11 @@ class MethodChannelPrinterModule extends PrinterModulePlatform {
   }
 
   @override
-  Future<int> connectPrinter() async {
+  Future<int> connectPrinter(PrinterType printerType) async {
     try {
-      final int status = await methodChannel.invokeMethod('connectPrinter');
+      final int status = await methodChannel.invokeMethod('connectPrinter', {
+        'printerType': printerType.name,
+      });
       return status;
     } on PlatformException catch (e) {
       print("Failed to connect printer: '${e.message}'.");

@@ -49,8 +49,8 @@ class PrinterModule {
     return PrinterModuleBluetooth.instance.disconnectBluetooth();
   }
 
-  Future<int> connectPrinter() {
-    return PrinterModulePlatform.instance.connectPrinter();
+  Future<int> connectPrinter(PrinterType printerType) {
+    return PrinterModulePlatform.instance.connectPrinter(printerType);
   }
 
   Future<int> connectUsbPrinter(String deviceId) {

@@ -41,7 +41,7 @@ class PrinterModulePlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       } else {
         result.error("INVALID_ARGUMENTS", "Printer type or commands are null.", null)
       }
-    } else if (call.method == "priterStatus") {
+    } else if (call.method == "printerStatus") {
       val printerTypeStr = call.argument<String>("printerType")
       if (printerTypeStr != null) {
         val status = statusPrinter(printerTypeStr)
